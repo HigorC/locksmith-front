@@ -1,28 +1,37 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="columns-principal columns is-centered is-vcentered">
+      <div class="column is-4">
+        <login />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Login from "./components/Login.vue";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    HelloWorld
+    Login
   }
-}
+};
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style lang="scss">
+// Import de font
+@import url('https://fonts.googleapis.com/css?family=Cinzel&display=swap');
+
+html {
+  background-color: #222831 !important;
+}
+
+.max-height{
+ height: 100vh;
+}
+
+html, body, #app, .columns-principal  {
+@extend .max-height
 }
 </style>

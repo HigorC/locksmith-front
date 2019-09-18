@@ -1,0 +1,9 @@
+/* Import Bulma's core */
+@import "../../node_modules/bulma/sass/utilities/_all";
+
+/* /Variáveis customizadas */
+@import "./variables.scss";
+
+ /* Import Bulma and Buefy styles */
+@import "../../node_modules/bulma";
+@import "../../node_modules/buefy/src/scss/buefy";
