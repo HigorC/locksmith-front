@@ -35,11 +35,10 @@
             <a class="button is-light is-fullwidth">Criar conta</a>
           </div>
           <div class="column is-6">
-            <a class="button is-success is-fullwidth">Login</a>
+            <a class="button login-btn is-success is-fullwidth">Login</a>
           </div>
         </div>
       </div>
-      <!-- <input class="input is-rounded" type="email" placeholder="Digite o código de autenticação" /> -->
     </div>
   </section>
 </template>
@@ -51,6 +50,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "../styles/main.scss";
+
 .card {
   background-color: #393e46;
   animation: pulse 2s infinite;
@@ -74,22 +75,25 @@ export default {
 .card-content {
   a {
     transition: all 0.2s linear;
-  }
 
+    &.login-btn {
+      background-color: $primary;
+    }
+  }
 
   input:last-child {
     margin-top: 1em;
   }
 }
 
-@keyframes pulse{
+@keyframes pulse {
   0% {
     box-shadow: 0px 0px 10px #00adb578, 0 0 0 1px rgba(115, 115, 115, 0.27);
   }
   50% {
     box-shadow: 0px 0px 30px #00adb578, 0 0 0 1px rgba(115, 115, 115, 0.27);
   }
-   100% {
+  100% {
     box-shadow: 0px 0px 10px #00adb578, 0 0 0 1px rgba(115, 115, 115, 0.27);
   }
 }

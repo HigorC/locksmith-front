@@ -21,17 +21,20 @@ export default {
 
 <style lang="scss">
 // Import de font
-@import url('https://fonts.googleapis.com/css?family=Cinzel&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Cinzel&display=swap");
 
 html {
   background-color: #222831 !important;
 }
 
-.max-height{
- height: 100vh;
+.max-height {
+  height: 100vh;
 }
 
-html, body, #app, .columns-principal  {
-@extend .max-height
+html,
+body,
+#app,
+.columns-principal {
+  @extend .max-height;
 }
 </style>
