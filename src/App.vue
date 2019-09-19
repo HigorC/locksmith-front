@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="columns-principal columns is-centered is-vcentered">
-      <div class="column is-4">
+      <div class="column is-3">
         <login />
       </div>
     </div>
@@ -25,6 +25,7 @@ export default {
 
 html {
   background-color: #222831 !important;
+  overflow-y: hidden !important;
 }
 
 .max-height {

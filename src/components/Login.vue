@@ -1,18 +1,26 @@
 <template>
   <section class="login">
     <div class="card">
+      <div
+        class="card-2"
+        :class="{'card-2-error': isEmailInvalid(), 'card-2-normal-pulse': !isEmailInvalid()}"
+      >
+        <!-- Div para suavizar transição dos keyframes de pulsação -->
+        <!-- 'pulse-success':isInputsPreenchidos()} -->
+      </div>
       <div class="card-header">
         <div class="card-header-title">
           <span class="titulo">
-            Lock
-            <span class="smith">smith</span>
+            -
+            <span class="lock">LOCK</span>
+            <span class="smith">SMITH</span> -
           </span>
         </div>
       </div>
       <div class="card-content">
         <div class="field">
           <p class="control has-icons-left">
-            <input class="input" type="email" placeholder="Email" />
+            <input v-model="email" class="input" type="email" placeholder="Email ou usuário" />
             <span class="icon is-small is-left">
               <i class="fas fa-envelope"></i>
             </span>
@@ -23,7 +31,7 @@
         </div>
         <div class="field">
           <p class="control has-icons-left">
-            <input class="input" type="password" placeholder="Password" />
+            <input v-model="senha" class="input" type="password" placeholder="Senha" />
             <span class="icon is-small is-left">
               <b-icon icon="lock"></b-icon>
             </span>
@@ -45,7 +53,26 @@
 
 <script>
 export default {
-  name: "Login"
+  name: "Login",
+  data: () => {
+    return {
+      email: "",
+      senha: "",
+      inputFocado: false
+    };
+  },
+  methods: {
+    isEmailInvalid: function() {
+      const re = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
+      return !re.test(this.email);
+    },
+    focarInput: function() {
+      this.inputFocado = true;
+    }
+    // isInputsPreenchidos: function() {
+    //   return !this.isEmailInvalid() && this.senha.length >= 4;
+    // }
+  }
 };
 </script>
 
@@ -53,10 +80,28 @@ export default {
 @import "../styles/main.scss";
 
 .card {
+  transition: all 0.5s linear;
   background-color: #393e46;
-  animation: pulse 2s infinite;
-  // box-shadow: 0px 0px 20px #00adb578, 0 0 0 1px rgba(115, 115, 115, 0.27);
-  // trocar cor green e red caso sucesso e erro
+  border-radius: 5px;
+
+  // Pulse básico, presente sempre
+  animation: pulse 2s infinite alternate;
+}
+
+.card-2 {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  border-radius: 5px;
+  transition: all 0.5s linear;
+
+  &-normal {
+    box-shadow: 0px 0px 10px #00adb578, 0 0 0 1px rgba(115, 115, 115, 0.27);
+  }
+
+  &-error {
+    box-shadow: 0px 0px 10px #ff3860, 0 0 0 1px rgba(115, 115, 115, 0.27);
+  }
 }
 
 .card-header-title {
@@ -66,8 +111,15 @@ export default {
     margin: 0 auto;
     font-family: "Cinzel", serif;
     font-weight: normal;
+
+    .lock {
+      text-shadow: 0px 0px 5px #a0a0a0;
+    }
+
     .smith {
-      font-weight: bold;
+      color: #00adb5;
+      text-shadow: 0px 0px 5px #00adb5;
+      animation: pulse-text 2s infinite;
     }
   }
 }
@@ -87,14 +139,23 @@ export default {
 }
 
 @keyframes pulse {
-  0% {
+  from {
     box-shadow: 0px 0px 10px #00adb578, 0 0 0 1px rgba(115, 115, 115, 0.27);
+  }
+  to {
+    box-shadow: 0px 0px 25px #00adb578, 0 0 0 1px rgba(115, 115, 115, 0.27);
+  }
+}
+
+@keyframes pulse-text {
+  0% {
+    text-shadow: 0px 0px 3px #00adb5;
   }
   50% {
-    box-shadow: 0px 0px 30px #00adb578, 0 0 0 1px rgba(115, 115, 115, 0.27);
+    text-shadow: 0px 0px 11px #00adb5;
   }
   100% {
-    box-shadow: 0px 0px 10px #00adb578, 0 0 0 1px rgba(115, 115, 115, 0.27);
+    text-shadow: 0px 0px 3px #00adb5;
   }
 }
 </style>
