@@ -1,31 +1,15 @@
-# locksmith-front
+# Locksmith (Front-end)
 
-## Project setup
+Aplicação gerenciadora de Tokens JWT, criada para permitir uma comunicação segura entre API's.
+
+## Instalação
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Para rodar
 ```
 npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
 
 Paleta de cores utilizada -> https://colorhunt.co/palette/2763

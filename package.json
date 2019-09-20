@@ -12,6 +12,7 @@
     "buefy": "^0.8.3",
     "core-js": "^2.6.5",
     "css-loader": "^3.2.0",
+    "express": "^4.17.1",
     "vue": "^2.6.10"
   },
   "devDependencies": {
