@@ -3,7 +3,7 @@
     <div class="card" :class="{'card-minimized':tryToLogin}">
       <div
         class="card-2"
-        :class="{'card-2-error': isEmailInvalid() && !tryToLogin, 'card-2-normal-pulse': !isEmailInvalid()}"
+        :class="{'card-2-error': isEmailInvalid() && !tryToLogin, 'card-2-normal-pulse': !isEmailInvalid(), 'card-2-loading': tryToLogin}"
       >
         <!-- Div para suavizar transição dos keyframes de pulsação -->
         <!-- 'pulse-success':isInputsPreenchidos()} -->
@@ -53,6 +53,8 @@
 </template>
 
 <script>
+const axios = require("axios");
+
 export default {
   name: "Login",
   data: () => {
@@ -72,7 +74,45 @@ export default {
       this.inputFocado = true;
     },
     login: function() {
-      this.tryToLogin = !this.tryToLogin;
+      if (this.email.trim() == "" || this.email.trim() == "") {
+        this.$buefy.toast.open({
+          message: "Informe seu email/usuário e senha.",
+          type: "is-danger"
+        });
+      } else {
+        this.tryToLogin = true;
+        const that = this;
+        axios
+          .post("http://127.0.0.1:5000/login", {
+            headers: {
+              "Access-Control-Allow-Origin": "*"
+            },
+            proxy: {
+              host: "104.236.174.88",
+              port: 3128
+            },
+            email: "red@red.com",
+            username: "redy",
+            password: 1234
+          })
+          .then(function(response) {
+            that.$buefy.toast.open({
+              message: "Logado",
+              type: "is-success"
+            });
+            console.log(response);
+          })
+          .catch(function(error) {
+            that.$buefy.toast.open({
+              message: "Falha ao logar-se",
+              type: "is-danger"
+            });
+            console.log(error);
+          })
+          .finally(() => {
+            this.tryToLogin = false;
+          });
+      }
     }
     // isInputsPreenchidos: function() {
     //   return !this.isEmailInvalid() && this.senha.length >= 4;
@@ -112,6 +152,10 @@ export default {
 
   &-error {
     box-shadow: 0px 0px 10px #ff3860, 0 0 0 1px rgba(115, 115, 115, 0.27);
+  }
+
+  &-loading {
+    animation: pulse-loading 1s infinite alternate;
   }
 }
 
@@ -164,6 +208,15 @@ export default {
   }
 }
 
+@keyframes pulse-loading {
+  from {
+    box-shadow: 0px 0px 0px #00adb578, 0 0 0 1px rgba(115, 115, 115, 0.27);
+  }
+  to {
+    box-shadow: 0px 0px 35px #00adb578, 0 0 0 1px rgba(115, 115, 115, 0.27);
+  }
+}
+
 @keyframes pulse-text {
   0% {
     text-shadow: 0px 0px 3px #00adb5;
@@ -177,6 +230,6 @@ export default {
 }
 
 .btn-teste {
-  background-color: transparent!important;
+  background-color: transparent !important;
 }
 </style>
