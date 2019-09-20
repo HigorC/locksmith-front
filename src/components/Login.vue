@@ -1,9 +1,9 @@
 <template>
   <section class="login">
-    <div class="card">
+    <div class="card" :class="{'card-minimized':tryToLogin}">
       <div
         class="card-2"
-        :class="{'card-2-error': isEmailInvalid(), 'card-2-normal-pulse': !isEmailInvalid()}"
+        :class="{'card-2-error': isEmailInvalid() && !tryToLogin, 'card-2-normal-pulse': !isEmailInvalid()}"
       >
         <!-- Div para suavizar transição dos keyframes de pulsação -->
         <!-- 'pulse-success':isInputsPreenchidos()} -->
@@ -17,7 +17,7 @@
           </span>
         </div>
       </div>
-      <div class="card-content">
+      <div class="card-content" :class="{'card-content-minimized':tryToLogin}">
         <div class="field">
           <p class="control has-icons-left">
             <input v-model="email" class="input" type="email" placeholder="Email ou usuário" />
@@ -43,11 +43,12 @@
             <a class="button is-light is-fullwidth">Criar conta</a>
           </div>
           <div class="column is-6">
-            <a class="button login-btn is-success is-fullwidth">Login</a>
+            <a class="button login-btn is-success is-fullwidth" @click="login">Login</a>
           </div>
         </div>
       </div>
     </div>
+    <a class="button login-btn is-success is-fullwidth btn-teste" @click="login">Login</a>
   </section>
 </template>
 
@@ -58,7 +59,8 @@ export default {
     return {
       email: "",
       senha: "",
-      inputFocado: false
+      inputFocado: false,
+      tryToLogin: false
     };
   },
   methods: {
@@ -68,6 +70,9 @@ export default {
     },
     focarInput: function() {
       this.inputFocado = true;
+    },
+    login: function() {
+      this.tryToLogin = !this.tryToLogin;
     }
     // isInputsPreenchidos: function() {
     //   return !this.isEmailInvalid() && this.senha.length >= 4;
@@ -80,12 +85,18 @@ export default {
 @import "../styles/main.scss";
 
 .card {
-  transition: all 0.5s linear;
+  transition: all 0.4s linear;
   background-color: #393e46;
   border-radius: 5px;
 
   // Pulse básico, presente sempre
   animation: pulse 2s infinite alternate;
+
+  max-height: 500px;
+
+  &-minimized {
+    max-height: 50px;
+  }
 }
 
 .card-2 {
@@ -125,6 +136,7 @@ export default {
 }
 
 .card-content {
+  transition: all 0.3s linear;
   a {
     transition: all 0.2s linear;
 
@@ -135,6 +147,11 @@ export default {
 
   input:last-child {
     margin-top: 1em;
+  }
+
+  &-minimized {
+    opacity: 0;
+    transform: translateY(-10%);
   }
 }
 
@@ -157,5 +174,9 @@ export default {
   100% {
     text-shadow: 0px 0px 3px #00adb5;
   }
+}
+
+.btn-teste {
+  background-color: transparent;
 }
 </style>
