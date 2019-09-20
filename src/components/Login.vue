@@ -177,6 +177,6 @@ export default {
 }
 
 .btn-teste {
-  background-color: transparent;
+  background-color: transparent!important;
 }
 </style>
