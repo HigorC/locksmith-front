@@ -3,7 +3,7 @@
     <div class="card" :class="{'card-minimized':tryToLogin}">
       <div
         class="card-2"
-        :class="{'card-2-error': isEmailInvalid() && !tryToLogin, 'card-2-normal-pulse': !isEmailInvalid(), 'card-2-loading': tryToLogin}"
+        :class="{'card-2-error': errorOnLogin, 'card-2-loading': tryToLogin}"
       >
         <!-- Div para suavizar transição dos keyframes de pulsação -->
         <!-- 'pulse-success':isInputsPreenchidos()} -->
@@ -62,7 +62,8 @@ export default {
       email: "",
       senha: "",
       inputFocado: false,
-      tryToLogin: false
+      tryToLogin: false,
+      errorOnLogin: false
     };
   },
   methods: {
@@ -100,6 +101,7 @@ export default {
               message: "Logado",
               type: "is-success"
             });
+            that.errorOnLogin = false;
             console.log(response);
           })
           .catch(function(error) {
@@ -107,6 +109,7 @@ export default {
               message: "Falha ao logar-se",
               type: "is-danger"
             });
+            that.errorOnLogin = true;
             console.log(error);
           })
           .finally(() => {
@@ -151,7 +154,7 @@ export default {
   }
 
   &-error {
-    box-shadow: 0px 0px 10px #ff3860, 0 0 0 1px rgba(115, 115, 115, 0.27);
+    // box-shadow: 0px 0px 10px #ff3860, 0 0 0 1px rgba(115, 115, 115, 0.27);
   }
 
   &-loading {
