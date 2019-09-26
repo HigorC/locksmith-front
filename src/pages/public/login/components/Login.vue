@@ -1,20 +1,13 @@
 <template>
   <section class="login">
     <div class="card" :class="{'card-minimized':tryToLogin}">
-      <div
-        class="card-2"
-        :class="{'card-2-error': errorOnLogin, 'card-2-loading': tryToLogin}"
-      >
+      <div class="card-2" :class="{'card-2-error': errorOnLogin, 'card-2-loading': tryToLogin}">
         <!-- Div para suavizar transição dos keyframes de pulsação -->
         <!-- 'pulse-success':isInputsPreenchidos()} -->
       </div>
       <div class="card-header">
         <div class="card-header-title">
-          <span class="titulo">
-            -
-            <span class="lock">LOCK</span>
-            <span class="smith">SMITH</span> -
-          </span>
+          <Logo />
         </div>
       </div>
       <div class="card-content" :class="{'card-content-minimized':tryToLogin}">
@@ -48,15 +41,19 @@
         </div>
       </div>
     </div>
-    <a class="button login-btn is-success is-fullwidth btn-teste" @click="login">Login</a>
   </section>
 </template>
 
 <script>
 const axios = require("axios");
 
+import Logo from "../../../../components/Logo";
+
 export default {
   name: "Login",
+  components: {
+    Logo
+  },
   data: () => {
     return {
       email: "",
@@ -114,6 +111,8 @@ export default {
           })
           .finally(() => {
             this.tryToLogin = false;
+
+            this.$router.push('/home')
           });
       }
     }
@@ -125,7 +124,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../styles/main.scss";
+@import "../../../../styles/main.scss";
 
 .card {
   transition: all 0.4s linear;
