@@ -24,7 +24,7 @@ export default {
 
 <style scoped lang="scss">
 .rodape {
-  height: 28px;
+  height: auto;
   font-size: 10px;
   background-color: #393e46 !important;
   color: #eeeeee;

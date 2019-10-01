@@ -22,11 +22,12 @@ export default {
 @import url("https://fonts.googleapis.com/css?family=Be+Vietnam|Roboto&display=swap");
 html {
   background-color: #222831 !important;
-  overflow-y: hidden !important;
+  // overflow-y: hidden !important;
 }
 
 .max-height {
   height: calc(100vh - 16px);
+  // height: 100vh;
 }
 
 html,
