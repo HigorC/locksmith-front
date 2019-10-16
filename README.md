@@ -13,3 +13,5 @@ npm run serve
 ```
 
 Paleta de cores utilizada -> https://colorhunt.co/palette/2763
+
+teste
